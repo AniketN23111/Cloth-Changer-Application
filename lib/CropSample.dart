@@ -44,7 +44,7 @@ class _CropSampleState extends State<CropSample> {
       if (await file.exists()) {
         final bytes = await file.readAsBytes();
         final decodedImage = img.decodeImage(bytes);
-        final resizedImage = img.copyResize(decodedImage!, width: 800, height: 1000);
+        final resizedImage = img.copyResize(decodedImage!, width: 800, height: 800);
         return Uint8List.fromList(img.encodePng(resizedImage));
       } else {
         print('File does not exist at the provided path: $path');

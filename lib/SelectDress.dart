@@ -8,6 +8,12 @@ class SelectDress extends StatelessWidget {
   final List<String> dressImages = [
     'assets/dress_images/dress1.png',
     'assets/dress_images/dress2.png',
+    'assets/dress_images/dress3.png',
+    'assets/dress_images/dress4.png',
+    'assets/dress_images/dress5.png',
+    'assets/dress_images/dress7.png',
+    'assets/dress_images/dress6.png',
+    'assets/dress_images/dress8.png',
     // Add more dress images as needed
   ];
 
