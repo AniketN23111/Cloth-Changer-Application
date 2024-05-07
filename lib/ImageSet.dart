@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'SelectBackgroundImage.dart';
 import 'SelectDress.dart';
@@ -31,11 +35,85 @@ class _ImageSetState extends State<ImageSet> {
     });
   }
 
+  Future<void> _downloadImage() async {
+    try {
+      // Get the directory for storing images
+      final exteranlDirectory = await getExternalStorageDirectory();
+      if (exteranlDirectory != null) {
+        final clothChangerDirectory = Directory('${exteranlDirectory.path}/ClothChanger');
+        print(exteranlDirectory);
+        print(getDownloadsDirectory());
+        // Create the 'ClothChanger' directory if it doesn't exist
+        if (!await clothChangerDirectory.exists()) {
+          await clothChangerDirectory.create(recursive: true);
+        }
+        final imagePath = '${clothChangerDirectory.path}/composed_image.png';
+        final composedImage = await _composeImages();
+        File(imagePath).writeAsBytesSync(composedImage);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Image downloaded successfully'),
+            backgroundColor: Colors.lightGreen,
+          ),
+        );
+      } else {
+        throw 'Failed to get documents directory';
+      }
+    } catch (e) {
+      print('Error downloading image: $e');
+    }
+  }
+
+  Future<Uint8List> _composeImages() async {
+    // Get the bytes of background image
+    final backgroundBytes = await rootBundle.load(backgroundImageAsset);
+    final backgroundUint8List = backgroundBytes.buffer.asUint8List();
+
+    // Get the bytes of dress image
+    final dressBytes = await rootBundle.load(dressImageAsset);
+    final dressUint8List = dressBytes.buffer.asUint8List();
+
+    // Compose the images
+    final background = await decodeImageFromList(backgroundUint8List);
+    final dress = await decodeImageFromList(dressUint8List);
+    final croppedImage = await decodeImageFromList(widget.croppedImageData!);
+
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder);
+
+    final paint = Paint()..filterQuality = FilterQuality.high;
+
+    // Draw the background image
+    canvas.drawImage(background, Offset.zero, paint);
+
+    // Draw the dress image overlay
+    canvas.drawImage(dress, Offset.zero, paint);
+
+    // Draw the cropped image overlay
+    canvas.drawImage(croppedImage, Offset.zero, paint);
+
+    final picture = recorder.endRecording();
+    final img = await picture.toImage(
+      background.width,
+      background.height,
+    );
+    final byteData = await img.toByteData(format: ui.ImageByteFormat.png);
+
+    return byteData!.buffer.asUint8List();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Image SET'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.download),
+            onPressed: _downloadImage,
+          ),
+        ],
       ),
       body: Stack(
         children: [
