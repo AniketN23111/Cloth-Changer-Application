@@ -1,10 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
+import 'package:cloth_changer/CroppedImagePage.dart';
 import 'package:crop_your_image/crop_your_image.dart';
-
-import 'CroppedImagePage.dart';
+import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
 
 class CropSample extends StatefulWidget {
   final String image;
@@ -38,13 +37,15 @@ class _CropSampleState extends State<CropSample> {
       _imageData = data;
     });
   }
-
-  // Load image data from path
+  // Load image data from path and resize to 400x600
   Future<Uint8List?> _loadImageData(String path) async {
     try {
       final file = File(path);
       if (await file.exists()) {
-        return await file.readAsBytes();
+        final bytes = await file.readAsBytes();
+        final decodedImage = img.decodeImage(bytes);
+        final resizedImage = img.copyResize(decodedImage!, width: 800, height: 1000);
+        return Uint8List.fromList(img.encodePng(resizedImage));
       } else {
         print('File does not exist at the provided path: $path');
         return null;
