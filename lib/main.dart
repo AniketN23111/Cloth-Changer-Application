@@ -12,9 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Cloth Changer'),

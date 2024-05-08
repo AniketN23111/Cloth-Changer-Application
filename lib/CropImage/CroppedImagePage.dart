@@ -3,8 +3,10 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:cloth_changer/ImageSet.dart';
+
 import 'package:flutter/material.dart';
+
+import '../MainScreen/ImageSet.dart';
 
 class CroppedImagePage extends StatefulWidget {
   final Uint8List? croppedImageData;

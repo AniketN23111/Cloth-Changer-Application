@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:cloth_changer/CroppedImagePage.dart';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
+
+import 'CroppedImagePage.dart';
 
 class CropSample extends StatefulWidget {
   final String image;

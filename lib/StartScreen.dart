@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // Import image_picker package
 
-import 'CropSample.dart';
+import 'CropImage/CropSample.dart';
 
 class StartScreen extends StatefulWidget {
 

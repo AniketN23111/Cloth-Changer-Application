@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'SelectBackgroundImage.dart';
-import 'SelectDress.dart';
+import '../SelectBackground/SelectBackgroundImage.dart';
+import '../SelectDress/SelectDress.dart';
+
 
 class ImageSet extends StatefulWidget {
   final Uint8List? croppedImageData;
