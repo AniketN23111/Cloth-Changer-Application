@@ -129,6 +129,7 @@ class _ImageSetState extends State<ImageSet> {
           Positioned.fill(
             child: Image.asset(
               dressImageAsset,
+              alignment: Alignment.bottomCenter,
               fit: BoxFit.scaleDown,
               width: double.infinity,
               height: double.infinity,
