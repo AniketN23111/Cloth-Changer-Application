@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // Import image_picker package
 
-import 'CropImage/CropSample.dart';
+import 'CropImage/crop_sample.dart';
 
 class StartScreen extends StatefulWidget {
+  const StartScreen({super.key});
+
 
   @override
   State<StartScreen> createState() => _StartScreenState();
@@ -25,7 +27,6 @@ class _StartScreenState extends State<StartScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              child:  Text('Gallery',style: TextStyle(color: Colors.white,fontSize: 20)),
               style: ElevatedButton.styleFrom(
         backgroundColor: Colors.purple,
           textStyle: const TextStyle(
@@ -43,11 +44,12 @@ class _StartScreenState extends State<StartScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CropSample(image: pickedFile.path),
+                      builder: (context) => crop_Sample(image: pickedFile.path),
                     ),
                   );
                 }
               },
+              child:  const Text('Gallery',style: TextStyle(color: Colors.white,fontSize: 20)),
             ),
           ],
         ),

@@ -6,7 +6,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-import '../MainScreen/ImageSet.dart';
+import '../MainScreen/image_set.dart';
 
 class CroppedImagePage extends StatefulWidget {
   final Uint8List? croppedImageData;
@@ -24,7 +24,7 @@ class _CroppedImagePageState extends State<CroppedImagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crop Image'),
+        title: const Text('Crop Image'),
       ),
       body: Center(
         child: RepaintBoundary(
@@ -36,7 +36,7 @@ class _CroppedImagePageState extends State<CroppedImagePage> {
             },
             onPanEnd: (details) {
               setState(() {
-                _points.add(Offset(-1, -1)); // To separate the points
+                _points.add(const Offset(-1, -1)); // To separate the points
               });
             },
             child: Stack(
@@ -57,7 +57,7 @@ class _CroppedImagePageState extends State<CroppedImagePage> {
           // Crop the image based on the drawn outline
           _cropImage();
         },
-        child: Icon(Icons.crop),
+        child: const Icon(Icons.crop),
       ),
     );
   }
@@ -72,7 +72,7 @@ class _CroppedImagePageState extends State<CroppedImagePage> {
     Path path = Path();
     path.moveTo(_points.first.dx, _points.first.dy);
     for (int i = 1; i < _points.length; i++) {
-      if (_points[i] == Offset(-1, -1)) {
+      if (_points[i] == const Offset(-1, -1)) {
         // End of drawing
         break;
       }
@@ -95,7 +95,7 @@ class _CroppedImagePageState extends State<CroppedImagePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Cropped Image'),
+        title: const Text('Cropped Image'),
         content: Image.memory(croppedBytes!),
         actions: [
           TextButton(
@@ -106,7 +106,7 @@ class _CroppedImagePageState extends State<CroppedImagePage> {
               });
               Navigator.of(context).pop(); // Close the dialog
             },
-            child: Text('Try Again'),
+            child: const Text('Try Again'),
           ),
           TextButton(
             onPressed: () {
@@ -120,7 +120,7 @@ class _CroppedImagePageState extends State<CroppedImagePage> {
                 ),
               );
             },
-            child: Text('Done'),
+            child: const Text('Done'),
           ),
         ],
       ),
@@ -134,7 +134,7 @@ class _CroppedImagePageState extends State<CroppedImagePage> {
       final ui.Image img = info.image;
       completer.complete(img);
     });
-    final ImageStream stream = image.resolve(ImageConfiguration());
+    final ImageStream stream = image.resolve(const ImageConfiguration());
     stream.addListener(listener);
     return completer.future;
   }
@@ -186,7 +186,7 @@ class CropOutlinePainter extends CustomPainter {
 
     // Draw solid lines
     for (int i = 0; i < points.length - 1; i++) {
-      if (points[i] != Offset(-1, -1) && points[i + 1] != Offset(-1, -1)) {
+      if (points[i] != const Offset(-1, -1) && points[i + 1] != const Offset(-1, -1)) {
         canvas.drawLine(points[i], points[i + 1], paint);
       }
     }

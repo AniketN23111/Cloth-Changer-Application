@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class SelectBackgroundImage extends StatelessWidget {
   final Function(String) onImageSelected;
 
-  SelectBackgroundImage({required this.onImageSelected});
+  SelectBackgroundImage({super.key, required this.onImageSelected});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Background Image'),
+        title: const Text('Select Background Image'),
       ),
       body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Change the cross axis count as needed
           mainAxisSpacing: 8.0,
           crossAxisSpacing: 8.0,

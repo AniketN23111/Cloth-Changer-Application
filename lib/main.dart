@@ -4,10 +4,12 @@ import 'StartScreen.dart';
 
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,9 +18,9 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Cloth Changer'),
+          title: const Text('Cloth Changer'),
         ),
-        body: StartScreen(),
+        body: const StartScreen(),
       ),
     );
   }

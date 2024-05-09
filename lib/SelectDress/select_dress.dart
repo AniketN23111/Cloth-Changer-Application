@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SelectDress extends StatelessWidget {
+class select_dress extends StatelessWidget {
   final Function(String) onDressSelected;
 
-  SelectDress({super.key, required this.onDressSelected});
+  select_dress({super.key, required this.onDressSelected});
 
   final List<String> dressImages = [
     'assets/dress_images/dress1.png',

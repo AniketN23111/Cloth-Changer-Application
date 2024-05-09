@@ -4,18 +4,18 @@ import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 
-import 'CroppedImagePage.dart';
+import 'cropped_image_page.dart';
 
-class CropSample extends StatefulWidget {
+class crop_Sample extends StatefulWidget {
   final String image;
 
-  CropSample({required this.image});
+  crop_Sample({required this.image});
 
   @override
   _CropSampleState createState() => _CropSampleState();
 }
 
-class _CropSampleState extends State<CropSample> {
+class _CropSampleState extends State<crop_Sample> {
   final _cropController = CropController();
   Uint8List? _imageData;
 

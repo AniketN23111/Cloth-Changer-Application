@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../SelectBackground/SelectBackgroundImage.dart';
-import '../SelectDress/SelectDress.dart';
+import '../SelectBackground/select_background_image.dart';
+import '../SelectDress/select_dress.dart';
 
 
 class ImageSet extends StatefulWidget {
@@ -52,7 +52,7 @@ class _ImageSetState extends State<ImageSet> {
         final composedImage = await _composeImages();
         File(imagePath).writeAsBytesSync(composedImage);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Image downloaded successfully'),
             backgroundColor: Colors.lightGreen,
           ),
@@ -108,10 +108,10 @@ class _ImageSetState extends State<ImageSet> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image SET'),
+        title: const Text('Image SET'),
         actions: [
           IconButton(
-            icon: Icon(Icons.download),
+            icon: const Icon(Icons.download),
             onPressed: _downloadImage,
           ),
         ],
@@ -139,7 +139,7 @@ class _ImageSetState extends State<ImageSet> {
           if (widget.croppedImageData != null)
             Positioned.fill(
               child: InteractiveViewer(
-                boundaryMargin: EdgeInsets.all(double.infinity),
+                boundaryMargin: const EdgeInsets.all(double.infinity),
                 minScale: 0.1,
                 maxScale: 4.0,
                 child: Image.memory(widget.croppedImageData!),
@@ -152,13 +152,13 @@ class _ImageSetState extends State<ImageSet> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Icons.person_outline),
+              icon: const Icon(Icons.person_outline),
               onPressed: () {
                 // Navigate to SelectDress screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SelectDress(
+                    builder: (context) => select_dress(
                       onDressSelected: selectDress,
                     ),
                   ),
@@ -166,7 +166,7 @@ class _ImageSetState extends State<ImageSet> {
               },
             ),
             IconButton(
-              icon: Icon(Icons.image),
+              icon: const Icon(Icons.image),
               onPressed: () {
                 // Navigate to SelectBackgroundImage screen
                 Navigator.push(
